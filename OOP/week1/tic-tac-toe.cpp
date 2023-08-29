@@ -1,3 +1,6 @@
+/*
+객지 1주차 Report Tic-Tac-Toe
+*/
 #include <iostream>
 using namespace std;
 char board[3][3];
