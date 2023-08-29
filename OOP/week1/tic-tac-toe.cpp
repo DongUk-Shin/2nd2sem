@@ -2,7 +2,7 @@
 using namespace std;
 char board[3][3];
 
-void make_board() {
+void clear_board() {
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             board[i][j] = ' ';
@@ -47,21 +47,22 @@ bool check_draw() {
     }
     return true;
 }
+
 bool play_again() {
     char response;
     cout << "Do you want to play again? (y/n): ";
     cin >> response;
 
-    if (response == 'y') {
-        
-    }
+    if (response == 'y' || response == 'Y') 
+        return true;
+    else 
+        return false;
 }
 
 int main() {
     int x, y;
-    make_board();
-
     do {
+        clear_board();
         int k = 0;
         while (true) {
             print_board();
@@ -88,5 +89,6 @@ int main() {
             }
         }
     } while (play_again());
+    cout << "Game Over!" << endl;
     return 0;
 }
