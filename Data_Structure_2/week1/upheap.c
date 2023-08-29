@@ -39,4 +39,5 @@ int main() {
     insert_max_heap(heap, e3);
 
     free(heap);
+    
 }
