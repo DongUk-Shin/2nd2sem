@@ -3,7 +3,6 @@
 */
 #include <iostream>
 using namespace std;
-//char board[3][3];
 
 void clear_board(char board[][3]) {
     for (int i = 0; i < 3; i++) {
