@@ -3,9 +3,9 @@
 */
 #include <iostream>
 using namespace std;
-char board[3][3];
+//char board[3][3];
 
-void clear_board() {
+void clear_board(char board[][3]) {
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             board[i][j] = ' ';
@@ -13,7 +13,7 @@ void clear_board() {
     }
 }
 
-void print_board() {
+void print_board(char board[][3]) {
     cout << "|---|---|---|" << endl;
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
@@ -23,7 +23,7 @@ void print_board() {
     }
 }
 
-bool check_winner() {
+bool check_winner(char board[][3]) {
     for (int i = 0; i < 3; i++) { //가로세로
         if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != ' ') 
             return true;
@@ -40,7 +40,7 @@ bool check_winner() {
     return false;
 }
 
-bool check_draw() {
+bool check_draw(char board[][3]) {
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             if (board[i][j] == ' ') {
@@ -64,11 +64,12 @@ bool play_again() {
 
 int main() {
     int x, y;
+    char board[3][3];
     do {
-        clear_board();
+        clear_board(board);
         int k = 0;
         while (true) {
-            print_board();
+            print_board(board);
             cin >> x >> y;
             if (x < 0 || x > 2 || y < 0 || y > 2) {
                 cout << "Please enter valid numbers from 0 to 2" << endl;
@@ -81,12 +82,13 @@ int main() {
             board[x][y] = (k % 2 == 0) ? 'X' : 'O';
             k++;
 
-            if (check_winner()) {
-                print_board();
+            if (check_winner(board)) {
+                print_board(board);
                 cout << board[x][y] << " Wins!" << endl;
                 break;
-            } else if (check_draw()) {
-                print_board();
+                
+            } else if (check_draw(board)) {
+                print_board(board);
                 cout << "It's a draw!" << endl;
                 break;
             }
