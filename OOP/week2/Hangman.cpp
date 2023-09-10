@@ -5,7 +5,6 @@
 #include <String>
 #include <ctime>
 #include <fstream>
-
 using namespace std;
 
 bool containsCharacter(string s, char c) {
@@ -21,7 +20,7 @@ bool play_again() {
     char response;
     cout << "To be continued? (y/n): ";
     cin >> response;
-
+    cout << "\n";
     if (response == 'y' || response == 'Y') 
         return true;
     else 
@@ -30,34 +29,31 @@ bool play_again() {
 
 int main() { 
     
-    string solution;
-    //string list[] = { "the", "apple", " programming ", " language "}; //단어 list
-
-    string filename = "C:\\Users\\PC\\Desktop\\git\\2nd2sem\\OOP\\week2\\letters.txt";
+    string filename = "C:\\git\\2nd2sem\\OOP\\week2\\letters.txt";
     ifstream file(filename);
 
-    
-    string list[50]; 
-    int wordCount = 0;
-
+    string wordlist[50]; 
     string word;
-    while (file >> word && wordCount < 50) {
-        list[wordCount] = word; // 각 단어를 배열에 저장
-        wordCount++;
+    string solution;
+    int wordIndex = 0;
+    
+    while (file >> word && wordIndex < 50) {
+        wordlist[wordIndex] = word; // 각 단어를 배열에 저장
+        wordIndex++;
     }
 
     do {
         srand(static_cast<unsigned int>(time(nullptr)));
         int n = rand() % 50;
-        solution = list[n]; //사전에서 랜덤 단어 선택해 solution에 저장
+        solution = wordlist[n]; //사전에서 랜덤 단어 선택해 solution에 저장
 
         string guess(solution.length(), '_');
-        int tryCount = 7;  
         string triedletters;
+        int tryCount = 7;  
         char userInput; 
 
         do {
-            cout << "The word now looks like this:" << guess << endl; // guess 현재 상태 보여주기
+            cout << "The word now looks like this:" << guess << endl; 
             cout << "input: "; // 사용자가 글자 추측
             cin >> userInput;
 
@@ -77,19 +73,22 @@ int main() {
             }
             
             if (solution == guess) {
-                cout << "Succes!" << endl;
+                cout << "Success!" << endl;
                 break;
             }
-
+            
             cout << "you have " << tryCount << " guesses left";
             cout << " (tried letters: " << triedletters << ")\n" << endl;
             
         } while (tryCount > 0 );
-
-        cout << "You win or You failed: " << solution;
+        
+        if (tryCount > 0) 
+            cout << "You win: " << solution;
+        else 
+            cout << "You failed: " << solution;
+        
         cout << " (tried letters: " << triedletters << ")" << endl;
         
-
     } while (play_again());
     
     cout << "Game Over!" << endl;
