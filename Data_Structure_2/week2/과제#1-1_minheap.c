@@ -60,6 +60,14 @@ element delete_min_heap(HeapType* h) {
 	return item;
 }
 
+void print_heap(HeapType *h) {
+	printf("\n");
+	for (int i = 1; i <= h->heap_size; i++) {
+		printf("%d ", h->heap[i]);
+	}
+	
+}
+
 int main() {
 
 	HeapType* heap;
@@ -79,8 +87,10 @@ int main() {
 	element d;
 
 	for (int i = 0; i < 9; i++) {
+		print_heap(heap);
 		d = delete_min_heap(heap);
-		printf("%d ", d.key);
+		printf("\ndelete: %d ", d.key);
+		
 	}
 	printf("\n");
 }
