@@ -60,7 +60,13 @@ element delete_max_heap(HeapType* h) {
 	return item;
 }
 
-
+void print_heap(HeapType *h) {
+	printf("heap status: ");
+	for (int i = 1; i <= h->heap_size; i++) {
+		printf("%d ", h->heap[i]);
+	}
+	
+}
 
 int main() {
 	HeapType* heap;
@@ -80,7 +86,7 @@ int main() {
 				scanf_s("%d", &intinput);
 				element e = { intinput };
 				insert_max_heap(heap, e);
-
+				print_heap(heap);
 			}
 			else {
 				printf("Full\n");
@@ -90,8 +96,8 @@ int main() {
 		else if (charinput == 'd') {
 			if (heap->heap_size > 0) {
 				element e = delete_max_heap(heap);
-				printf("%d\n", e.key);
-
+				printf("delete: %d\n", e.key);
+				print_heap(heap);
 			}
 			else {
 				printf("Empty\n");
@@ -101,7 +107,7 @@ int main() {
 		else if (charinput == 'q') {
 			break;
 		}
-
+		
 
 	} while (1);
 }

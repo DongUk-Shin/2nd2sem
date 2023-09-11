@@ -61,7 +61,7 @@ element delete_min_heap(HeapType* h) {
 }
 
 void print_heap(HeapType *h) {
-	printf("\n");
+	printf("\nheap status: ");
 	for (int i = 1; i <= h->heap_size; i++) {
 		printf("%d ", h->heap[i]);
 	}
