@@ -12,9 +12,9 @@ int visted_list[MAX_VERTICES];
 typedef struct { 
     int n;
     int adj_mat[MAX_VERTICES][MAX_VERTICES];
-} GraphType1;
+} GraphType_mat;
 
-void init_mat(GraphType1* g) {
+void init_mat(GraphType_mat* g) {
     int r, c;
     g->n = 0;
     for (r = 0; r < MAX_VERTICES; r++) {
@@ -24,7 +24,7 @@ void init_mat(GraphType1* g) {
     }
 }
 
-void insert_vertex(GraphType1* g, int v) {
+void insert_mat_vertex(GraphType_mat* g, int v) {
     if ((g->n) > MAX_VERTICES) {
         fprintf(stderr, "Exceeding the number of vertices");
         return;
@@ -32,7 +32,7 @@ void insert_vertex(GraphType1* g, int v) {
     g->n++;
 }
 
-int insert_edge(GraphType1* g, int start, int end) {
+int insert_mat_edge(GraphType_mat* g, int start, int end) {
 
     if (start == end) {
         return FALSE;
@@ -52,7 +52,7 @@ int insert_edge(GraphType1* g, int start, int end) {
     return TRUE;
 }
 
-void print_adj_mat(GraphType1* g) {
+void print_adj_mat(GraphType_mat* g) {
     char a = 'A';
     for (int i = 0; i < g->n; i++) {
         printf("%c  ", a);
@@ -64,7 +64,7 @@ void print_adj_mat(GraphType1* g) {
     }
 }
 
-void dfs_mat(GraphType1* g, int v) {
+void dfs_mat(GraphType_mat* g, int v) {
     int w;
     char a = 'A';
     a = a + v;
@@ -82,13 +82,13 @@ typedef struct GraphNode {
     struct GraphNode* link;
 }GraphNode;
 
-typedef struct GraphType {
+typedef struct GraphType_list {
     int n;
     GraphNode* adj_list[MAX_VERTICES];
-}GraphType;
+}GraphType_list;
 
 
-void init_list(GraphType* g) {
+void init_list(GraphType_list* g) {
     int v;
     g->n = 0;
 
@@ -98,7 +98,7 @@ void init_list(GraphType* g) {
 }
 
 
-void dfs_list(GraphType* g, int v) {
+void dfs_list(GraphType_list* g, int v) {
     GraphNode* w;
     char c = 'A';
     c = c + v;
@@ -110,7 +110,7 @@ void dfs_list(GraphType* g, int v) {
     }
 }
 
-void insert_list_vertex(GraphType* g, int v) {
+void insert_list_vertex(GraphType_list* g, int v) {
     if (g->n >= MAX_VERTICES) {
         fprintf(stderr, "Exceeding the number of vertices");
         return;
@@ -119,7 +119,7 @@ void insert_list_vertex(GraphType* g, int v) {
     g->n++;
 }
 
-int insert_list_edge(GraphType* g, int u, int v) {
+int insert_list_edge(GraphType_list* g, int u, int v) {
 
     if (u >= g->n || v >= g->n) {
         fprintf(stderr, "Error");
@@ -140,12 +140,12 @@ int insert_list_edge(GraphType* g, int u, int v) {
 }
 
 
-void print_adj_list(GraphType* g) {
+void print_adj_list(GraphType_list* g) {
     for (int i = 0; i < g->n; i++) {
         GraphNode* p = g->adj_list[i];
-        printf(" %d ㅇㅇㅇ ", i);
+        printf("Adjacency list of vertex %d:", i);
         while (p != NULL) {
-            printf("-> %d", p->vertex);
+            printf(" -> %d", p->vertex);
             p = p->link;
         }
         printf("\n");
@@ -153,9 +153,9 @@ void print_adj_list(GraphType* g) {
 }
 
 int main() {
-    GraphType1* g;
-    g = (GraphType1*)malloc(sizeof(GraphType1));
-    init_mat(g);
+    GraphType_mat* g_m;
+    g_m = (GraphType_mat*)malloc(sizeof(GraphType_mat));
+    init_mat(g_m);
     srand(time(NULL));
 
     printf("Please enter the number of vertices: ");
@@ -163,7 +163,7 @@ int main() {
     scanf("%d", &ver);
 
     for (int i = 0; i < ver; i++) {
-        insert_vertex(g, i);
+        insert_mat_vertex(g_m, i);
     }
     printf("Generate a random connected graph\n");
 
@@ -176,40 +176,40 @@ int main() {
     while (i < edge) {
         int randomX = rand() % ver;
         int randomY = rand() % ver;
-        if (!insert_edge(g, randomX, randomY)) {
+        if (!insert_mat_edge(g_m, randomX, randomY)) {
             continue;
         }
 
         i++;
     }
 
-    print_adj_mat(g);
-    printf("인접 행렬 DFS: ");
-    dfs_mat(g, 0);
+    print_adj_mat(g_m);
+    printf("adjacency matrix DFS: ");
+    dfs_mat(g_m, 0);
 
     printf("\n-------------------------------------------\n");
 
-    GraphType* gg;
-    gg = (GraphType*)malloc(sizeof(GraphType));
-    init_list(gg);
+    GraphType_list* g_l;
+    g_l = (GraphType_list*)malloc(sizeof(GraphType_list));
+    init_list(g_l);
 
-    for (int i = 0; i < g->n; i++) { 
-        insert_list_vertex(gg, i);
+    for (int i = 0; i < g_m->n; i++) { 
+        insert_list_vertex(g_l, i);
     }
 
-    for (int i = 0; i < g->n; i++) {
-        for (int j = 0; j < g->n; j++) {
-            if (g->adj_mat[i][j] == 1) {
-                insert_list_edge(gg, i, j);
+    for (int i = 0; i < g_m->n; i++) {
+        for (int j = 0; j < g_m->n; j++) {
+            if (g_m->adj_mat[i][j] == 1) {
+                insert_list_edge(g_l, i, j);
             }
         }
     }
 
-    print_adj_list(gg);
-    printf("\n인접 연결 리스트 DFS: ");
-    dfs_list(gg, 0);
+    print_adj_list(g_l);
+    printf("\nadjacency list DFS: ");
+    dfs_list(g_l, 0);
     printf("\n");
-    free(g);
-    free(gg);
+    free(g_m);
+    free(g_l);
     return 0;
 }
