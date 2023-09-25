@@ -20,7 +20,7 @@ public:
 	}
 	
 	~Student() {
-		cout << name << " die" << endl;
+		cout << name << " is die" << endl;
 	}
 
 	void setMarks(double m) {

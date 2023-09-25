@@ -4,7 +4,7 @@ using namespace std;
 
 class Student {
 private:
-	int marks;
+	double marks;
 	string name;
 
 public:
@@ -13,17 +13,17 @@ public:
 		marks = 0;
 		cout << name <<" is crying" << endl;
 	}
-	Student(string n, int m) {
+	Student(string n, double m) {
 		name = n;
 		marks = m;
 		cout << name << " is crying" << endl;
 	}
 	
 	~Student() {
-		cout << name << " die" << endl;
+		cout << name << " is die" << endl;
 	}
 
-	int getMarks() {
+	double getMarks() {
 		return marks;
 	}
 	string getName() {
@@ -37,7 +37,7 @@ void print(Student &s) {
 
 int main() {
 	Student s1;
-	Student s2("Gildong", 4);
+	Student s2("Gildong", 4.5);
 
     print(s1);
     print(s2);
