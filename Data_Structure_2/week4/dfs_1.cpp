@@ -104,7 +104,8 @@ void dfs_list(GraphType_list* g, int v) {
     c = c + v;
     visted_list[v] = TRUE;
     printf("%c ", c);
-    for (w = g->adj_list[v]; w; w = w->link) {
+    w = g->adj_list[v];
+    for (w; w; w = w->link) {
         if (!visted_list[w->vertex])
             dfs_list(g, w->vertex);
     }
@@ -211,5 +212,6 @@ int main() {
     printf("\n");
     free(g_m);
     free(g_l);
+    printf("\n");
     return 0;
 }

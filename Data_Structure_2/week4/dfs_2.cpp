@@ -212,7 +212,7 @@ int main() {
     print_adj_list(g_l);
     printf("\nadjacency list DFS: ");
     dfs_list(g_l, 0);
-    printf("\n");
+    printf("\n\n");
     free(g_m);
     free(g_l);
     return 0;
