@@ -1,4 +1,4 @@
-
+#include <vector>
 #include <iostream>
 using namespace std;
 
@@ -24,29 +24,29 @@ class Person {
 
 class Family {
     private:
-        Person* p;
+        vector<Person> vc;
         string surname;
         int num;
 
     public:
-        Family(string n, int num): surname(n), num(num) { 
-            p = new Person[num];
-        }
-        ~Family() {
-            delete p;
-        }
+        Family(string n, int num): surname(n), num(num) { }
 
         void setMembers() {
-            int age;
-            string name;
+            cout << "\n당신 가족의 각 구성원에 대해서 이름과 나이를 입력하세요: " << endl;
             for (int i = 0; i < num; i++) {
-                cout << "Input Name: ";
-                cin >> name;
-                p[i].setName(name);
+                int age;
+                string name;
+                Person p;
 
-                cout << "Input Age: ";
+                cout << "Enter a Name: ";
+                cin >> name;
+                p.setName(name);
+
+                cout << "Enter a Age: ";
                 cin >> age;
-                p[i].setAge(age);
+                p.setAge(age);
+
+                vc.push_back(p);
             }
         }
 
@@ -58,22 +58,23 @@ class Family {
             return surname;
         }
 
-        Person* getPeople() {
-            return p;
+        vector<Person> getVc() {
+            return vc;
         }
 };
 
 void show(Family* f) {
     int num = f->getNum();
     string name = f->getSurname();
-    Person *p = f->getPeople();
+    vector<Person> vc = f->getVc();
 
-    cout << "Family Name: " << name << endl;
-    cout << "Family Members:" << endl;
+    cout << "\n" << name << " 의 가족은 다음과 같이 " << num << "명 입니다" << endl;
+    cout << "Name           Age" << endl;
 
-    for (int i = 0; i < num; i++) {
-        cout << "Name: " << p[i].getName() << ", Age: " << p[i].getAge() << endl;
+    for (auto& p : vc) {
+        cout  << p.getName() << "              " << p.getAge() << endl;
     }
+    cout << "You did a good job" << endl;
 }
 
 int main() {
