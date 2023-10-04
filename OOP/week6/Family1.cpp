@@ -32,7 +32,7 @@ class Family {
         Family(string n, int num): surname(n), num(num) { }
 
         void setMembers() {
-            cout << "\n´ç½Å °¡Á·ÀÇ °¢ ±¸¼º¿ø¿¡ ´ëÇØ¼­ ÀÌ¸§°ú ³ªÀÌ¸¦ ÀÔ·ÂÇÏ¼¼¿ä: " << endl;
+            cout << "\në‹¹ì‹  ê°€ì¡±ì˜ ê° êµ¬ì„±ì›ì— ëŒ€í•´ì„œ ì´ë¦„ê³¼ ë‚˜ì´ë¥¼ ìž…ë ¥í•˜ì„¸ìš”: " << endl;
             for (int i = 0; i < num; i++) {
                 int age;
                 string name;
@@ -68,7 +68,7 @@ void show(Family* f) {
     string name = f->getSurname();
     vector<Person> vc = f->getVc();
 
-    cout << "\n" << name << " ÀÇ °¡Á·Àº ´ÙÀ½°ú °°ÀÌ " << num << "¸í ÀÔ´Ï´Ù" << endl;
+    cout << "\n" << name << " ì˜ ê°€ì¡±ì€ ë‹¤ìŒê³¼ ê°™ì´ " << num << "ëª… ìž…ë‹ˆë‹¤" << endl;
     cout << "Name           Age" << endl;
 
     for (auto& p : vc) {
