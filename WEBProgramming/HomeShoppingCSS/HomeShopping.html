@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+
+<head>
+    <title>순카</title>
+    <style>
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            font-size: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        ul li a:hover {
+            color: #E33535;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #E33535;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-title {
+            flex-grow: 1;
+            text-align: center;
+            font-weight: bold;
+            font-size: 30px;
+            margin: 0;
+        }
+
+        .header-title a {
+            text-decoration: none;
+            color: white;
+            font-size: 40px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+        }
+
+        nav ul li a:hover {
+            color: #000000;
+        }
+
+        .menu-container {
+            display: flex;
+            height: 90vh;
+            
+        }
+
+        .menu {
+            width: 300px;
+        }
+
+        .main-content {
+            flex-grow: 1; /* 높이를 자동으로 조정하도록 수정 */
+            padding: 20px; /* 여백 추가 */
+        }
+
+        iframe {
+            width: 100%; /* iframe을 부모 요소의 너비에 맞게 설정 */
+            height: 100%;/* iframe을 화면의 높이에 맞게 설정 */
+            border: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <img src="image/logo.png" height="70" alt="logo.png">
+            <div class="header-title">
+                <a href="main.html" target="mainFrame">SoonCar</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="signin.html" target="mainFrame">SignIn</a></li>
+                    <li><a href="signup.html" target="mainFrame">SignUp</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="menu-container">
+        <div class="menu">
+            <ul>
+                <li><a href="main.html" target="mainFrame">전체보기</a></li>
+                <li><a href="bmw.html" target="mainFrame">BMW</a></li>
+                <li><a href="benz.html" target="mainFrame">벤츠</a></li>
+                <li><a href="audi.html" target="mainFrame">아우디</a></li>
+                <li><a href="tesla.html" target="mainFrame">테슬라</a></li>
+                <li><a href="hyundai.html" target="mainFrame">현대</a></li>
+                <li><a href="kia.html" target="mainFrame">기아</a></li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <iframe name="mainFrame" src="main.html"></iframe>
+        </div>
+    </div>
+</body>
+
+</html>
