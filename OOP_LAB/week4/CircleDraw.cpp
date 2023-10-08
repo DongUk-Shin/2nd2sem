@@ -16,8 +16,6 @@ public:
 	Circle(int x=1, int y=1 , int r=1) : x(x), y(y), radius(r) {
 		cout << "Circle with " << radius << " created" << endl;
 	}
-
-
 	void print() {
 		cout << "radius: " << radius << endl;
 	}

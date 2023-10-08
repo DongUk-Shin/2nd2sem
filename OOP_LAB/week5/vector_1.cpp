@@ -31,5 +31,6 @@ int main() {
     for (auto &a : vc)
         cout << a << " ";
 
+    cout << endl;
     return 0;
 }

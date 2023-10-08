@@ -6,26 +6,7 @@
     <title>순카</title>
     <style>
         
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        ul li {
-            font-size: 30px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        ul li a {
-            text-decoration: none;
-            color: #333;
-        }
-
-        ul li a:hover {
-            color: #E33535;
-        }
-
+        
 
         body {
             font-family: Arial, sans-serif;
@@ -83,22 +64,33 @@
 
         .menu-container {
             display: flex;
-            height: 90vh;
-            
+            height: 85vh;
         }
 
         .menu {
             width: 300px;
         }
+        .menu p {
+            font-size: 30px;
+            margin-bottom: 70px;
+            text-align: center;
+        }
+        .menu p a {
+            text-decoration: none;
+            color: #333;
+        }
+        .menu p a:hover {
+            color: #E33535;
+        }
 
         .main-content {
-            flex-grow: 1; /* 높이를 자동으로 조정하도록 수정 */
-            padding: 20px; /* 여백 추가 */
+            flex-grow: 1;
+            padding: 20px; 
         }
 
         iframe {
-            width: 100%; /* iframe을 부모 요소의 너비에 맞게 설정 */
-            height: 100%;/* iframe을 화면의 높이에 맞게 설정 */
+            width: 100%; 
+            height: 100%;
             border: none;
         }
 
@@ -123,15 +115,13 @@
 
     <div class="menu-container">
         <div class="menu">
-            <ul>
-                <li><a href="main.html" target="mainFrame">전체보기</a></li>
-                <li><a href="bmw.html" target="mainFrame">BMW</a></li>
-                <li><a href="benz.html" target="mainFrame">벤츠</a></li>
-                <li><a href="audi.html" target="mainFrame">아우디</a></li>
-                <li><a href="tesla.html" target="mainFrame">테슬라</a></li>
-                <li><a href="hyundai.html" target="mainFrame">현대</a></li>
-                <li><a href="kia.html" target="mainFrame">기아</a></li>
-            </ul>
+            <p><a href="main.html" target="mainFrame">전체보기</a></p>
+            <p><a href="bmw.html" target="mainFrame">BMW</a></p>
+            <p><a href="benz.html" target="mainFrame">벤츠</a></p>
+            <p><a href="audi.html" target="mainFrame">아우디</a></p>
+            <p><a href="tesla.html" target="mainFrame">테슬라</a></p>
+            <p><a href="hyundai.html" target="mainFrame">현대</a></p>
+            <p><a href="kia.html" target="mainFrame">기아</a></p>
         </div>
 
         <div class="main-content">

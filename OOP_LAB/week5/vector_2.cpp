@@ -27,10 +27,10 @@ int main() {
     for (int i = 1; i < 4; i++) { 
         Circle c(i); 
         v.push_back(c); 
-        cout << "==========================" << endl;
+        //cout << "==========================" << endl;
     }
 
-    cout << "==========================" << endl;
+    //cout << "==========================" << endl;
 
     for (auto& c : v) 
         cout << c.getRadius() << endl;
