@@ -3,21 +3,25 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-
+int a = 0;
 class Circle {
     private:
         int radius;
 
     public:
+        int n;
         Circle(int r): radius(r) {
             cout << "Crying " << radius << endl;
         }
         ~Circle() {
-            cout << "Dying " << radius << endl;
+            cout << "Dying " << radius << " " << n << endl;
+            n = a;
         }
         Circle(const Circle &c) {
             radius = 0;
-            cout << "Copy " << radius << endl;
+
+            cout << "Copy " << a << endl;
+            a++;
         }
         int getRadius() {
             return radius;

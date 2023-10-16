@@ -30,7 +30,7 @@ int main() {
     sort(vc.begin(), vc.end(), compare);
     for (auto &a : vc)
         cout << a << " ";
-
+    cout << endl;
     vc.pop_back();
     for (auto &a : vc)
         cout << a << " ";

@@ -70,15 +70,15 @@ int main(void) {
 	}
 	cout << endl;
 
-	sort(ar, ar + 3, compare);
+	sort(ar, ar + 3, compare); 
 	for (auto &a : ar) {
 		a->display();
 	}
 	cout << endl;
 
-	for (int i = 0; i < 3; i++) {
-		delete ar[i];
-	}
+	
+
+	delete[] ar;
 	cout << endl;
 	return 0;
 }
