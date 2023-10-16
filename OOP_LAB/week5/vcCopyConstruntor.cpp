@@ -15,6 +15,10 @@ class Circle {
         ~Circle() {
             cout << "Dying " << radius << endl;
         }
+        Circle(const Circle &c) {
+            radius = 0;
+            cout << "Copy " << radius << endl;
+        }
         int getRadius() {
             return radius;
         }
@@ -27,10 +31,10 @@ int main() {
     for (int i = 1; i < 4; i++) { 
         Circle c(i); 
         v.push_back(c); 
-        //cout << "==========================" << endl;
+        cout << "==========================" << endl;
     }
 
-    //cout << "==========================" << endl;
+    cout << "==========================" << endl;
 
     for (auto& c : v) 
         cout << c.getRadius() << endl;

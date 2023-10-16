@@ -15,7 +15,7 @@ class Circle {
 			cout << "distructor: " << radius << endl;
 		}
 		Circle(Circle &c) {
-			radius = 100;
+			radius = 1000;
 			cout << "Copy Constructor: " << radius << endl;
 		}
 		void print() { 
