@@ -15,10 +15,12 @@ class Circle {
         ~Circle() {
             cout << "Dying " << radius << endl;
         }
-        int getRadius() {
-            return radius;
-        }
+        int getRadius();
 };
+
+int Circle::getRadius() {
+    return radius;
+}
 
 int main() { 
 

@@ -39,7 +39,7 @@ public:
 };
 
 
-Complex add(Complex a, Complex b) {
+Complex& add(Complex &a, Complex &b) {
 	Complex t;
 	cout << "--------------------d-----------" << endl;
 	int real = a.getReal() + b.getReal();
