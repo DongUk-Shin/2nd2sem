@@ -53,6 +53,9 @@ bool compare(Rect *a, Rect *b) {
 int main(void) {
 	Rect *ar[3];
 
+
+
+
 	for (int i = 0; i < 3; i++) 
 		ar[i] = new Rect;
 
@@ -76,9 +79,11 @@ int main(void) {
 	}
 	cout << endl;
 
-	
+	for (int i = 0; i < 3; i++) {
+		delete ar[i];
+	}
 
-	delete[] ar;
+	delete []ar;
 	cout << endl;
 	return 0;
 }

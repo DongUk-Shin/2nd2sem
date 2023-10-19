@@ -3,7 +3,12 @@ using namespace std;
 
 
 class Rect {
+
+private:
+    
+
 public:
+static int a;
     int i;
         Rect(int i = 1) {
             this->i = i;
@@ -20,9 +25,17 @@ void cop(Rect *r) {
         r->i *= 2;
 }
 
+
+class A {
+    void asd() {
+        Rect::a = 1;
+
+    }
+};
+
 int main() {
-    Rect r;
-    Rect q = r;
+
+    Rect::a = 0;
 
     return 0;
 }

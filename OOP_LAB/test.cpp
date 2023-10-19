@@ -6,6 +6,7 @@ class Rect {
 public:
     int i;
         Rect(int i = 1) {
+            cout << " asdsadsad" << endl;
             this->i = i;
         }
         ~Rect() {
@@ -25,6 +26,8 @@ int main() {
     
     Rect *e = new Rect(5); //객체 동적 생성
     Rect *f = new Rect[3]; //객체 동적 3개 생성
+
+
 
     cout << "=================" << endl;
     
