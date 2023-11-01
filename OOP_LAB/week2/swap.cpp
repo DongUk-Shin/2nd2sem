@@ -19,6 +19,13 @@ void swap(int *a, int *b) {
 	*b = tmp;
 }
 
+void swap1(int &a, int &b) {
+	int tmp = a;
+	a = b;
+	b = tmp;
+}
+
+
 void reverse(int a[], int size) {
 	int j;
 
@@ -34,6 +41,7 @@ void reverse(int a[], int size) {
 }
 
 
+
 int main() {
 
 	int a[] = { 1, 2, 3, 4, 5, 6, 7, 8 ,9, 10};
@@ -42,5 +50,10 @@ int main() {
 	reverse(a, 10);
 	reverse(b, 11);
 
+	int aa = 1;
+	int bb = 2;
+
+	swap1(aa, bb);
+	cout << aa << " " << bb << endl;
 	return 0;
 }
