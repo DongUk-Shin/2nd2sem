@@ -100,23 +100,20 @@ int main(void) {
     g = (GraphType *)malloc(sizeof(GraphType));
     graph_init(g);
 
-    g->nvertex = 8;
-    /*
-    insert_edge(g, 0, 7, 1);
-    insert_edge(g, 1, 5, 2);
-    insert_edge(g, 3, 7, 3);
-    insert_edge(g, 1, 2, 4);
-    insert_edge(g, 4, 5, 5);
-    insert_edge(g, 0, 3, 6);
-    insert_edge(g, 2, 5, 7);
-    insert_edge(g, 4, 7, 8);
-    insert_edge(g, 5, 6, 9);
-    insert_edge(g, 0, 1, 10);
-    insert_edge(g, 2,3, 11);
-    insert_edge(g, 6,7, 12);
-*/
-    insert_edge(g, 0, 1, 1);
-    insert_edge(g, 1, 5, 2);
+    g->nvertex = 7;
+    
+    insert_edge(g, 0, 1, 7);
+    insert_edge(g, 1, 2, 8);
+    insert_edge(g, 0, 3, 5);
+    insert_edge(g, 1, 4, 7);
+    insert_edge(g, 2, 4, 5);
+    insert_edge(g, 3, 4, 15);
+    insert_edge(g, 1, 3, 9);
+
+    insert_edge(g, 3, 5, 6);
+    insert_edge(g, 4, 5, 8);
+    insert_edge(g, 4, 6, 9);
+    insert_edge(g, 5, 6, 11);
 
     kruskal(g);
     free(g);
