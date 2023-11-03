@@ -48,14 +48,14 @@ void floyd(GraphType* g)
 
 int main(void)
 {
-	GraphType g = { 7, {
-    { 0,   INF, INF, INF, INF, INF},
-	{ INF,  0,  INF, INF, INF, INF, INF },
-	{ INF, INF, 0,   INF, INF, INF, INF },
-	{ INF, INF, INF,   0, INF, INF, INF },
-	{ INF, INF, INF, INF,  0,  INF, INF },
-	{ INF, INF, INF, INF, INF,  0,  INF },
-	{ INF, INF, INF, INF, INF, INF, 0 } }
+	GraphType g = { 6, {
+    { 0,   50, 45, 10, INF, INF},
+	{ INF,  0,  10, 15, INF, INF},
+	{ INF, INF, 0,   INF, 30, INF},
+	{ 20, INF, INF,   0, 15, INF},
+	{ INF, 20, 35, INF,  0,  INF},
+	{ INF, INF, INF, INF, 3,  0},
+	}
 	};
 	floyd(&g);
 	return 0;
