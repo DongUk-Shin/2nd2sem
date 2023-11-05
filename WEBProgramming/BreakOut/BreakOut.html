@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!--
+
+    추가사항
+    생명 표시
+    점수 표시
+    벽돌 색
+    벽돌이 공격
+
+-->
+<head>
+    <style> 
+        canvas {
+            background: rgb(243, 245, 117);
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="600" height="400"></canvas>
+    <script>
+        // 캔버스 객체를 찾아서 변수 canvas에 저장한다.
+        let canvas = document.getElementById("myCanvas");
+        // 컨텍스트 객체를 얻는다.
+        let context = canvas.getContext("2d");
+        let brickRows = 3; // 벽돌의 총 행 수
+        let brickColumns = 5; // 벽돌의 총 열 수
+        let brickWidth = 75; // 벽돌 1개의 폭
+        let brickHeight = 20; // 벽돌 1개의 높이
+        let brickPadding = 10; // 벽돌 사이의 간격
+        let brickStartX = 30; // 화면에서 벽돌이 시작되는 위치
+        let brickStartY = 30; // 화면에서 벽돌이 시작되는 위치
+        let lives = 3; //생명
+        let score = 0;
+        let bricks = new Array(brickRows); // 크기가 brickRow인 배열을 생성한다.
+        
+        let ball = { // 공을 리터럴 객체로 정의한다.
+            x: canvas.width / 2, // 공의 x좌표
+            y: canvas.height - 30, // 공의 y좌표
+            dx: 2, // 공의 x 방향 속도
+            dy: -2, // 공의 y 방향 속도
+            radius: 10, // 공의 반지름
+            draw: function () { // 공을 화면에 그리는 메소드
+                context.beginPath();
+                context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                context.fillStyle = "#000000";
+                context.fill();
+                context.closePath();
+            }
+        };
+        let paddle = { // 패들을 객체로 정의한다.
+            height: 10, // 패들의 높이
+            width: 90, // 패들의 폭
+            x: 300, // 패들의 x좌표
+            draw: function () { // 패들을 화면에 그리는 함수
+                context.beginPath();
+                context.rect(this.x, canvas.height - this.height, this.width, this.height);
+                context.fillStyle = "blue";
+                context.fill();
+                context.closePath();
+            }
+        };
+        class Brick { // 벽돌을 클래스로 정의한다.
+            constructor(x, y, status) { // 생성자 함수
+                this.x = x;
+                this.y = y;
+                this.status = status;
+            }
+            draw() { // 벽돌의 화면에 그리는 함수
+                if (this.status == 1) {// 아직도 살아 있는 벽돌이면
+                    context.beginPath();
+                    context.rect(this.x, this.y, brickWidth, brickHeight);
+                    context.fillStyle = "brown";
+                    context.fill();
+                    context.closePath();
+                }
+            }
+            check() { // 공과 벽돌의 충돌 여부를 검사하는 함수
+                if (this.status == 1) { // 아직도 살아 있는 벽돌이면
+                    if (ball.x > this.x && ball.x < this.x + brickWidth // 충돌 조건
+                        && ball.y > this.y && ball.y < this.y + brickHeight) {
+                        ball.dy = -ball.dy; // 볼의 방향을 반전한다.
+                        score += 100;
+                        let sc = document.getElementById('score');
+                        sc.textContent = score;
+                        this.status = 0; // 벽돌을 보이지 않게 한다.
+                    }
+                }
+            }
+        }
+        function init() { // 초기화 함수
+            
+            // 마우스 이동 이벤트 처리 함수 등록
+            document.addEventListener("mousemove", mouseHandler, false);
+            for (let r = 0; r < brickRows; r++) { // 전체 벽돌 행에 대하여
+                bricks[r] = new Array(brickColumns); // 1차원 배열을 생성하여 대입한다.
+                for (let c = 0; c < brickColumns; c++) {
+                    // 벽돌의 위치를 계산한다.
+                    let brickX = (c * (brickWidth + brickPadding)) + brickStartX;
+                    let brickY = (r * (brickHeight + brickPadding)) + brickStartY;
+                    // 벽돌 객체를 생성하여서 배열에 저장한다.
+                    bricks[r][c] = new Brick(brickX, brickY, 1);
+                }
+            }
+        }
+        function mouseHandler(e) { // 마우스 이벤트 처리기
+            let x = e.clientX - canvas.offsetLeft; // 마우스의 위치를 계산한다.
+            if (x > 0 && x < canvas.width) {
+                paddle.x = x - paddle.width / 2; // 패들의 x좌표에 저장한다.
+            }
+        }
+        function gameLoop() { // 게임 루프 함수
+            
+            context.clearRect(0, 0, canvas.width, canvas.height); // 화면을 지운다.
+            let life = document.getElementById('life');
+            life.textContent = lives;
+            let sc = document.getElementById('score');
+            sc.textContent = score;
+            ball.draw(); // 화면에 공을 그린다.
+            paddle.draw(); // 화면에 패들을 그린다.
+            for (let r = 0; r < brickRows; r++) {
+                for (let c = 0; c < brickColumns; c++) { // 각 벽돌에 대하여
+                    bricks[r][c].check(); // 충돌 검사를 한다.
+                    bricks[r][c].draw(); // 벽돌을 화면에 그린다.
+                }
+            }
+            // 공이 화면의 왼쪽이나 오른쪽에 도달하였으면 방향을 바꾼다.
+            if (ball.x + ball.dx > canvas.width - ball.radius
+                || ball.x + ball.dx < ball.radius) {
+                ball.dx = -ball.dx;
+            }
+            // 공이 화면의 위쪽에 도달하였으면 방향을 바꾼다.
+            if (ball.y + ball.dy < ball.radius) {
+                ball.dy = -ball.dy;
+            }
+            // 공이 화면의 아래쪽에 도달하였으면 패들과 충돌을 검사한다.
+            else if (ball.y + ball.dy > canvas.height - ball.radius) {
+                if (ball.x > paddle.x && ball.x < paddle.x + paddle.width) {
+                    ball.dy = -ball.dy;
+                }
+                else {
+                    lives--; // 생명 감소
+                    ball.dy = -ball.dy;
+                }
+            }
+            if (lives <= 0) {
+                let life = document.getElementById('life');
+                life.textContent = 0;
+                ball.x = 300
+                ball.y = 350
+                clearInterval(interval);
+            }
+            ball.x += ball.dx; // 공의 위치를 변경한다.
+            ball.y += ball.dy;
+        }
+        function restartGame() {
+            location.reload(); // 게임 다시 시작
+        }
+        init();
+        setInterval(gameLoop, 1); // 10밀리초마다 gameLoop()을 호출한다.
+        
+        
+
+    </script>
+    
+    <h1>Life:</h1>
+    <h1 id="life"></h1>
+
+    <h1>Score:</h1>
+    <h1 id="score"></h1>
+    <button onclick="restartGame()">게임 다시 시작</button>
+    
+</body>
+
+</html>
