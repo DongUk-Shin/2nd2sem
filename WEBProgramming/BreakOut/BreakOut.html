@@ -14,6 +14,51 @@
     <style> 
         canvas {
             background: rgb(243, 245, 117);
+            border: 1px solid black;
+            display: block;
+        }
+        .numberbox {
+            display: flex; 
+            justify-content: space-between; 
+            background-color: #ccc; 
+            padding: 10px; 
+            margin: 10px; 
+            width: 550px;
+            border: 2px solid rgb(138, 138, 138);
+        }
+        .numberbox h1 {
+            margin: 0;
+        }
+        button {
+            background-color: #007bff; 
+            color: #fff; 
+            border: none; 
+            padding: 10px 20px; 
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3; 
+        }
+        .gameover {
+            position: absolute;
+            top: 100px; 
+            left: 160px;
+            font-size: 2em;
+        }
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .blinking-paddle {
+        animation: blink 0.5s infinite;
         }
     </style>
 </head>
@@ -33,7 +78,8 @@
         let brickStartX = 30; // 화면에서 벽돌이 시작되는 위치
         let brickStartY = 30; // 화면에서 벽돌이 시작되는 위치
         let lives = 3; //생명
-        let score = 0;
+        let score = 0; //점수
+        let iswin = brickColumns * brickRows;
         let bricks = new Array(brickRows); // 크기가 brickRow인 배열을 생성한다.
         
         let ball = { // 공을 리터럴 객체로 정의한다.
@@ -57,22 +103,48 @@
             draw: function () { // 패들을 화면에 그리는 함수
                 context.beginPath();
                 context.rect(this.x, canvas.height - this.height, this.width, this.height);
-                context.fillStyle = "blue";
+                context.fillStyle = "#2f92fb";
                 context.fill();
                 context.closePath();
             }
         };
+
+        let meteorimg = new Image();
+        meteorimg.src = 'meteor.png';
+        let meteor = {
+            x: 50,
+            y: 50,
+            dy: 1,
+            draw: function() {
+                context.drawImage(meteorimg, this.x, this.y, meteorimg.width, meteorimg.height);
+            }
+        }
+
         class Brick { // 벽돌을 클래스로 정의한다.
             constructor(x, y, status) { // 생성자 함수
                 this.x = x;
                 this.y = y;
                 this.status = status;
+                this.strength = 1;
+                this.strength = Math.floor(Math.random() * 3) + 1; //벽돌 강도 랜덤
+                this.isAttacking = false; // 공격 여부를 나타내는 속성
+                
             }
             draw() { // 벽돌의 화면에 그리는 함수
                 if (this.status == 1) {// 아직도 살아 있는 벽돌이면
                     context.beginPath();
                     context.rect(this.x, this.y, brickWidth, brickHeight);
-                    context.fillStyle = "brown";
+                    switch(this.strength) {
+                    case 1:
+                        context.fillStyle = "#A9A9A9";
+                        break;
+                    case 2:
+                        context.fillStyle = "#808080";
+                        break;
+                    case 3:
+                        context.fillStyle = "#505050";
+                        break;
+                    }
                     context.fill();
                     context.closePath();
                 }
@@ -82,10 +154,14 @@
                     if (ball.x > this.x && ball.x < this.x + brickWidth // 충돌 조건
                         && ball.y > this.y && ball.y < this.y + brickHeight) {
                         ball.dy = -ball.dy; // 볼의 방향을 반전한다.
-                        score += 100;
                         let sc = document.getElementById('score');
                         sc.textContent = score;
-                        this.status = 0; // 벽돌을 보이지 않게 한다.
+
+                        this.strength--;
+                        if (this.strength == 0) {
+                            score += 100; // 벽돌 부수면 점수+
+                            this.status = 0; // 벽돌을 보이지 않게 한다.
+                        }
                     }
                 }
             }
@@ -101,6 +177,7 @@
                     let brickX = (c * (brickWidth + brickPadding)) + brickStartX;
                     let brickY = (r * (brickHeight + brickPadding)) + brickStartY;
                     // 벽돌 객체를 생성하여서 배열에 저장한다.
+
                     bricks[r][c] = new Brick(brickX, brickY, 1);
                 }
             }
@@ -111,6 +188,18 @@
                 paddle.x = x - paddle.width / 2; // 패들의 x좌표에 저장한다.
             }
         }
+        function checkwin() {
+            for (let r = 0; r < brickRows; r++) {
+                for (let c = 0; c < brickColumns; c++) {
+                    if (bricks[r][c].status === 1) {
+                        // 아직 살아있는 벽돌이 있다면 승리 상태가 아님
+                        return false;
+                    }
+                }
+            }
+            return true; // 모든 벽돌이 파괴되면 true, 그렇지 않으면 false 반환
+        }
+
         function gameLoop() { // 게임 루프 함수
             
             context.clearRect(0, 0, canvas.width, canvas.height); // 화면을 지운다.
@@ -120,6 +209,7 @@
             sc.textContent = score;
             ball.draw(); // 화면에 공을 그린다.
             paddle.draw(); // 화면에 패들을 그린다.
+            meteor.draw();
             for (let r = 0; r < brickRows; r++) {
                 for (let c = 0; c < brickColumns; c++) { // 각 벽돌에 대하여
                     bricks[r][c].check(); // 충돌 검사를 한다.
@@ -145,31 +235,59 @@
                     ball.dy = -ball.dy;
                 }
             }
-            if (lives <= 0) {
+
+            if (meteor.y + meteor.dy + meteorimg.height > canvas.height) { //운석이 바닥에 닿으면
+                if (meteor.x > paddle.x && meteor.x < paddle.x + paddle.width) {
+                    lives--;
+                }
+                meteor.x = Math.floor(Math.random() * 570) + 1
+                meteor.y = -meteorimg.height;
+            }
+            
+
+            if (lives <= 0) { //패배했는지 검사
                 let life = document.getElementById('life');
                 life.textContent = 0;
-                ball.x = 300
-                ball.y = 350
+                let winorlose = document.getElementById('winorlose');
+                winorlose.textContent = "You Lose..";
+                document.removeEventListener("mousemove", mouseHandler, false);
+                clearInterval(interval);
+            }
+            if (checkwin()) { //승리했는지 검사
+                let winorlose = document.getElementById('winorlose');
+                winorlose.textContent = "You Win!";
+                document.removeEventListener("mousemove", mouseHandler, false);
                 clearInterval(interval);
             }
             ball.x += ball.dx; // 공의 위치를 변경한다.
             ball.y += ball.dy;
+            meteor.y += meteor.dy;
         }
         function restartGame() {
             location.reload(); // 게임 다시 시작
         }
         init();
-        setInterval(gameLoop, 1); // 10밀리초마다 gameLoop()을 호출한다.
+        setInterval(gameLoop, 5); // 10밀리초마다 gameLoop()을 호출한다.
         
         
 
     </script>
-    
-    <h1>Life:</h1>
-    <h1 id="life"></h1>
 
-    <h1>Score:</h1>
-    <h1 id="score"></h1>
+
+    <div class="numberbox"> 
+        <h1>Life:</h1>
+        <h1 id="life"></h1>
+    </div>
+
+    <div class="numberbox"> 
+        <h1>Score:</h1>
+        <h1 id="score"></h1>
+    </div>
+
+    <div class="gameover"> 
+        <h1 id="winorlose"></h1>
+    </div>
+    
     <button onclick="restartGame()">게임 다시 시작</button>
     
 </body>
