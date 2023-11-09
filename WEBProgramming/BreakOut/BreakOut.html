@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 
-<!--
-
-    추가사항
-    생명 표시
-    점수 표시
-    벽돌 색
-    벽돌이 공격
-
--->
 <head>
     <style> 
         canvas {
@@ -110,10 +101,7 @@
                 this.x = x;
                 this.y = y;
                 this.status = status;
-                this.strength = 1;
                 this.strength = Math.floor(Math.random() * 3) + 1; //벽돌 강도 랜덤
-                this.isAttacking = false; // 공격 여부를 나타내는 속성
-                
             }
             draw() { // 벽돌의 화면에 그리는 함수
                 if (this.status == 1) {// 아직도 살아 있는 벽돌이면
@@ -254,10 +242,7 @@
         init();
         setInterval(gameLoop, 5); // 10밀리초마다 gameLoop()을 호출한다.
         
-        
-
     </script>
-
 
     <div class="numberbox"> 
         <h1>Life:</h1>
@@ -274,7 +259,5 @@
     </div>
     
     <button onclick="restartGame()">게임 다시 시작</button>
-    
 </body>
-
 </html>
