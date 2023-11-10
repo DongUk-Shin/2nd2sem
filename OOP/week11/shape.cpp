@@ -4,10 +4,8 @@
 using namespace std;
 
 class Shape {
-
 protected:
     string name;
-    double area;
 public:
     Shape(string name) {
         this->name = name;
@@ -15,31 +13,47 @@ public:
     string getName() {
         return name;
     }
-    double getArea() {
-        return area;
+    virtual double getArea() {
+        cout << "Shape의 getArea()" << endl;
+        return 0;
     }
 };
 
 class Circle : public Shape {
+    int radius;
 public:
     Circle(string name, int radius) : Shape(name) {
-        area = radius * radius * 3.14;
+        this->radius = radius;
+    }
+    double getArea() {
+        return radius * radius * 3.14;
     }
 };
 
 class Rectangle : public Shape {
+    int width;
+    int height;
 public:
     Rectangle(string name, int width, int height) : Shape(name) {
-        area = width * height;
+        this->width = width;
+        this->height = height;
+    }
+    double getArea() {
+        return width * height;
     }
 };
 
-
 class Triangle : public Shape {
+    int side1, side2, side3;
 public:
     Triangle(string name, int side1, int side2, int side3) : Shape(name) {
+        this->side1 = side1;
+        this->side2 = side2;
+        this->side3 = side3;
+    }
+    double getArea() {
         double p = (side1 + side2 + side3) / 2;
-        area = sqrt(p * (p - side1) * (p - side2) * (p - side3));
+        return sqrt(p * (p - side1) * (p - side2) * (p - side3));
     }
 };
 
