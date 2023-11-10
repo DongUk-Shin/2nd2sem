@@ -127,14 +127,15 @@
                     if (ball.x > this.x && ball.x < this.x + brickWidth // 충돌 조건
                         && ball.y > this.y && ball.y < this.y + brickHeight) {
                         ball.dy = -ball.dy; // 볼의 방향을 반전한다.
-                        let sc = document.getElementById('score');
-                        sc.textContent = score;
+                        
 
                         this.strength--;
                         if (this.strength == 0) {
                             score += 100; // 벽돌 부수면 점수+
                             this.status = 0; // 벽돌을 보이지 않게 한다.
                         }
+                        let sc = document.getElementById('score');
+                        sc.textContent = score;
                     }
                 }
             }
@@ -240,7 +241,7 @@
             location.reload(); // 게임 다시 시작
         }
         init();
-        setInterval(gameLoop, 5); // 10밀리초마다 gameLoop()을 호출한다.
+        setInterval(gameLoop, 5); // 5밀리초마다 gameLoop()을 호출한다.
         
     </script>
 
