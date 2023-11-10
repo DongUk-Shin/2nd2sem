@@ -4,7 +4,6 @@
 using namespace std;
 
 class Shape {
-protected:
     string name;
 public:
     Shape(string name) {
