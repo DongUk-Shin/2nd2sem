@@ -12,10 +12,7 @@ public:
     string getName() {
         return name;
     }
-    virtual double getArea() {
-        cout << "Shape의 getArea()" << endl;
-        return 0;
-    }
+    virtual double getArea() = 0;
 };
 
 class Circle : public Shape {
