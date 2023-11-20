@@ -6,9 +6,7 @@ using namespace std;
 class Shape {
     string name;
 public:
-    Shape(string name) {
-        this->name = name;
-    }
+    Shape(string name) : name(name) {}
     string getName() {
         return name;
     }
@@ -64,4 +62,5 @@ int main() {
 
     for (auto& e : s)
         delete e;
+    cout << endl;
 }

@@ -7,7 +7,7 @@
 #define INF 1000L
 
 typedef struct GraphType {
-	int n;	// 정점의 개수
+	int n;	// 정점 개수
 	int weight[MAX_VERTICES][MAX_VERTICES];
 } GraphType;
 
@@ -19,13 +19,15 @@ int distance[MAX_VERTICES];
 int get_min_vertex(int n)
 {
 	int v, i;
-	for (i = 0; i < n; i++)
+	for (i = 0; i < n; i++) {
 		if (!selected[i]) {
 			v = i;
 			break;
 		}
+	}
 	for (i = 0; i < n; i++)
-		if (!selected[i] && (distance[i] < distance[v])) v = i;
+		if (!selected[i] && (distance[i] < distance[v])) 
+			v = i;
 	return (v);
 }
 
@@ -41,38 +43,44 @@ void prim(GraphType* g, int s)
 		u = get_min_vertex(g->n);
 		selected[u] = TRUE;
 
-		printf("셀렉티드 selected[%d] -> %d\n", i, selected[i]);
-
 		if (distance[u] == INF) return;
-		printf("정점 %d 추가\n", u);
-		for (v = 0; v < g->n; v++)
-			if (g->weight[u][v] != INF)
-				if (!selected[v] && g->weight[u][v] < distance[v]) {
-					printf("디스턴스 distance[%d] = %d\n", distance[v], g->weight[u][v]);
-					distance[v] = g->weight[u][v];
+		printf("\n정점 %d 추가\n", u);
 
+		
+
+		for (v = 0; v < g->n; v++) {
+			if (g->weight[u][v] != INF) {
+				if (!selected[v] && g->weight[u][v] < distance[v]) {
+					distance[v] = g->weight[u][v];
 				}
+			}
+		}
+		for (int i = 0; i < g->n; i++) {
+			printf("selected[%d]:%d ", i, selected[i]);
+
+		}
+		printf("\n");
+		for (int i = 0; i < g->n; i++) {
+			printf("distance[%d]:%d ", i, distance[i]);
+
+		}
 	}
-	int sum = 0;
-	for (int i = 0; i < g->n; i++) {
-		sum += distance[i];
-	}
-	printf("합 %d", sum);
 }
 
 int main(void)
 {
-	GraphType g = { 9,{
-	{ 0,    35,  INF, INF, 245, INF, INF , INF, INF},
-	{ 35,   0,   123, INF, INF, 154, INF , INF, INF},
-	{ INF,  123, 0,   117, INF, 165, 222 , INF, INF},
-	{ INF,  INF, 117, 0,   INF, INF, INF , INF, INF},
-	{ 245,  INF, INF, INF, 0  , 87 , INF , INF, 98 },
-	{ INF,  154, 165, INF, 87 , 0  , 155 , INF, 122},
-	{ INF,  INF, 222, INF, INF, 155,   0 , 164, INF},
-	{ INF,  INF, INF, INF, INF, INF, 164 , 0,   INF},
-	{ INF,  INF, INF, INF, 98 , 122, INF , INF,  0 }
-	}};
+	GraphType g = { 7, 
+	{
+	{ 0  , 29 , INF, INF, INF, 10 , INF },
+	{ 29 , 0  , 16 , INF, INF, INF, 15  },
+	{ INF, 16 , 0  , 12 , INF, INF, INF },
+	{ INF, INF, 12 , 0  , 22 , INF, 18  },
+	{ INF, INF, INF, 22 , 0  , 27 , 25  },
+	{ 10 , INF, INF, INF, 27 , 0  , INF },
+	{ INF, 15 , INF, 18 , 25 , INF, 0   } }
+	};
+
 	prim(&g, 0);
+	printf("\n");
 	return 0;
 }

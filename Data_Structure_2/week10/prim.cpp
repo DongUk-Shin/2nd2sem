@@ -7,14 +7,14 @@
 #define INF 1000L
 
 typedef struct GraphType {
-	int n;	// 정점의 개수
+	int n;	// ?????? ????
 	int weight[MAX_VERTICES][MAX_VERTICES];
 } GraphType;
 
 int selected[MAX_VERTICES];
 int distance[MAX_VERTICES];
 
-// 최소 dist[v] 값을 갖는 정점을 반환
+// ??? dist[v] ???? ???? ?????? ???
 int get_min_vertex(int n)
 {
 	int v, i;
@@ -52,17 +52,17 @@ void prim(GraphType* g, int s)
 		}
 		printf("\n");
 		if (distance[u] == INF) return;
-		printf("정점 %d 추가\n", u);
+		printf("???? %d ???\n", u);
 		for (v = 0; v < g->n; v++)
 			if (g->weight[u][v] != INF)
 				if (!selected[v] && g->weight[u][v] < distance[v])
 					distance[v] = g->weight[u][v];
 	}
 	int a = 0;
-	for (int i = 0; i <= g->n; i++) { // 거리값 합산
+	for (int i = 0; i <= g->n; i++) { // ????? ???
 		a += distance[i];
 	}
-	printf("거리는: %d", a);
+	printf("?????: %d", a);
 }
 
 

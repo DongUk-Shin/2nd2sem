@@ -9,7 +9,7 @@ public:
 		a = 0;
 		cout << "持失切 A: " << a << endl;
 	}
-	~A() {
+	virtual ~A() {
 		cout << "社瑚切 A" << endl;
 	}
 	void f() {
@@ -59,20 +59,7 @@ public:
 
 int main() {
 
-	A* a = new A;
-	B* b = new B;
-	C* c = new C;
-	vector<A*> vc;
-	vc.push_back(a);
-	vc.push_back(b);
-	vc.push_back(c);
-
-	for (auto& a : vc) {
-		a->f();
-		a->v();
-	}
-}
-	/*
+	
 	A a;
 	B b;
 	C c;
@@ -93,4 +80,5 @@ int main() {
 	cout << "===================================" << endl;
 	delete pa;
 	cout << "===================================" << endl;
-	*/
+	
+}
