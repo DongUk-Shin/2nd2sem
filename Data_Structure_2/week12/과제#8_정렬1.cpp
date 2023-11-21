@@ -97,7 +97,7 @@ void shell_sort(int list[], int n)   // n = size
 
 
 int main() {
-
+	/*
 	int list[10], insertion[10], selection[10], bubble[10], sell[10];
 
 	int random;
@@ -133,6 +133,8 @@ int main() {
 
 	printf("¼ÐÁ¤·Ä: \n");
 	shell_sort(sell, 10);
+	*/
 
-
+	int list[] = {7, 4, 9, 6, 3, 8, 7, 5};
+	insertion_sort(list, 8);
 }
