@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            width: 100%; 
+            margin: 0;
+        }
+        .nav iframe {
+            width: 100%; 
+            height: 100px;
+            border: none;
+        }
+        h2 {
+            color: #333;
+        }
+
+        form {
+            width: 300px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            font-size: 20px;
+            color: #333;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        @media screen and (max-width: 800px) {
+            .nav iframe {
+                width: 100%; 
+                height: 300px;
+                border: none;
+            }
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <iframe src="navbar.html" frameborder="0" scrolling="no"></iframe>
+    </div>
+    
+    <h2>회원가입</h2>
+    <form onsubmit="validateForm()">
+        <p>이름:</p>
+        <input type="text" id="name"><br><br>
+        <p>이메일:</p>
+        <input type="email" id="email"><br><br>
+        <p>아이디:</p>
+        <input type="text" id="userid"><br><br>
+        <p>비밀번호:</p>
+        <input type="password" id="password"><br><br>
+
+        <input type="submit" value="가입하기">
+    </form>
+
+    <script>
+
+        function validateForm() {
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var userid = document.getElementById('userid').value;
+            var password = document.getElementById('password').value;
+
+            if (name === '' || email === '' || userid === '' || password === '') {
+                alert('모든 필드를 채워주세요.');
+                return false;
+            }
+
+            if (userid.length < 6) {
+                alert('아이디는 6자 이상이어야 합니다.');
+                return false;
+            }
+
+            if (password.length < 8) {
+                alert('비밀번호는 8자 이상이어야 합니다.');
+                return false;
+            }
+
+            alert('회원가입이 성공하였습니다!');
+            
+            return true;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+
+
+.car-item img {
+    height: 150px;
+    clear: both;
+}
+
+.car-info {
+    text-align: center;
+    line-height: 0.5; /* 텍스트 상하 간격을 최소화 */
+}
+
+.car-info a {
+    text-decoration: none; /* 밑줄 제거 */
+}
+
+.car-title {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.car-price {
+    border: none;
+    background-color: white;
+    font-size: 1.5em;
+    
+    color: #3512f7;
+    
+}
+.car-price:hover {
+    color: #E33535;
+    cursor: pointer;
+}

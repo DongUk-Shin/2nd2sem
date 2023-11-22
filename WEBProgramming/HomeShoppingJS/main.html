@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width initial-scale=1.0">
+<html>
+
+<head>
+    <title>순카</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        nav {
+            height: 10px;
+        }
+        
+        .car-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+        
+        .nav iframe {
+            width: 100%; 
+            height: 100px;
+            border: none;
+        }
+
+        .car-item{
+            margin-right: auto;
+        } 
+        .filter-buttons {
+            text-align: center;
+            margin-top: 100px;
+            margin-left: 50px;
+            margin-right: 50px;
+            float: left;
+        }
+
+        .filter-button {
+            padding: 8px 16px;
+            margin: 5px;
+            width: 110px;
+            height: 50px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: large;
+            display: block;
+        }
+        .filter-button:hover {
+            background-color: #2b612dc4;
+            cursor: pointer;
+        }
+        .star {
+            display: flex;
+            margin-left: 50px;
+            
+            padding-left: 7px;
+            padding-right: 7px;
+            padding-bottom: 5px;
+            
+            font-size: larger;
+            color: black;
+            background-color: yellow;
+            cursor: pointer;
+            border-radius: 30%;
+        }
+        .star.starred {
+            background-color: #d1a803; /* 변경할 배경색 */
+            color: black; /* 변경할 글자색 */
+        }
+
+        @media screen and (max-width: 800px) {
+            .car-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                
+            }
+            .nav iframe {
+                width: 100%; 
+                height: 300px;
+                border: none;
+            }
+            .filter-button {
+                display: inline;
+            }
+            .filter-buttons {
+                margin-top: 0;
+                float: none;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="CarStyle.css">
+    
+</head>
+
+<body>
+
+    <div class="nav">
+        <iframe src="navbar.html" id="navFrame"></iframe>
+    </div>
+<div class="filter-buttons">
+        <button class="filter-button" onclick="showAll()">전체보기</button>
+        <button class="filter-button" onclick="filterByBrand('BMW')">BMW</button>
+        <button class="filter-button" onclick="filterByBrand('BENZ')">BENZ</button>
+        <button class="filter-button" onclick="filterByBrand('Audi')">Audi</button>
+        
+        <button class="filter-button" onclick="filterStarredCar()">즐겨찾기</button>
+        
+</div>
+
+<div class="car-container">
+        <div class="car-item">
+            <button class="star" onclick="toggleStar(this, 'BMW 5')">★</button>
+            <img src="image/BMW5.png" alt="BMW5.png">
+            <div class="car-info">
+                <p class="car-title">
+                    BMW 5 
+                </p>
+                <button class="car-price" onclick="purchase('BMW 5', 50011)">구매하기</button>
+                
+                <p>가격 6,880 ~ 12,440만원</p>
+                <p>출력 184 ~ 530hp</p>
+                <p>토크 29.6 ~ 76.5kg.m</p>
+                <p>배기 1,995 ~ 4,395cc</p>
+                <p>엔진 I4, V8 트윈터보</p>
+            </div>
+        </div>
+        <div class="car-item">
+            <button class="star" onclick="toggleStar(this, 'BMW 7')">★</button>
+            <img src="image/BMW7.png" alt="BMW7.png">
+            <div class="car-info">
+                <p class="car-title">
+                    BMW 7
+                </p>
+                <button class="car-price" onclick="purchase('BMW 7', 17770)">구매하기</button>
+                <p>가격 15,980 ~ 17,770만원</p>
+                <p>출력 299 ~ 381hp</p>
+                <p>토크 55.1 ~ 68.3kg.m</p>
+                <p>배기 2,993 ~ 2,998cc</p>
+                <p>엔진 I6 싱글터보</p>
+            </div>
+        </div>
+        <div class="car-item">
+            <button class="star" onclick="toggleStar(this, 'BMW X5')">★</button>
+            <img src="image/BMWX5.png" alt="BMW5.png">
+            <div class="car-info">
+                <p class="car-title">
+                    BMW X5
+                </p>
+                <button class="car-price" onclick="purchase('BMW X5', 16060)">구매하기</button>
+                
+                <p>가격 11,700 ~ 16,060만원</p>
+                <p>출력 298 ~ 530hp</p>
+                <p>토크 53 ~ 76.4kg.m</p>
+                <p>배기 2,993 ~ 4,395cc</p>
+                <p>엔진 I6, V8 트윈터보</p>
+            </div>
+        </div>
+        <div class="car-item">
+            <button class="star" onclick="toggleStar(this, 'BMW X6')">★</button>
+            <img src="image/BMWX6.png" alt="BMWX6.png">
+            <div class="car-info">
+                <p class="car-title">
+                    BMW X6</p>
+                    <button class="car-price" onclick="purchase('BMW X6', 16410)">구매하기</button>
+                
+                <p>가격 12,580 ~ 16,410만원</p>
+                <p>출력 298 ~ 530hp</p>
+                <p>토크 53 ~ 76.4kg.m</p>
+                <p>배기 2,993 ~ 4,395cc</p>
+                <p>엔진 I6, V8 트윈터보</p>
+            </div>
+        </div>
+        <div class="car-item">
+            <button class="star" onclick="toggleStar(this, 'BENZ C-Class')">★</button>
+            <img src="image/BenzCclass.png" alt="BenzCclass.png">
+            <div class="car-info">
+                <p class="car-title">
+                    BENZ C-Class</p>
+                    <button class="car-price" onclick="purchase('BENZ C-Class', 7400)">구매하기</button>
+                
+                <p>가격 6,830 ~ 7,400만원</p>
+                <p>출력 258hp</p>
+                <p>토크 40.8kg.m</p>
+                <p>배기 1,999cc</p>
+                <p>엔진 I4 싱글터보</p>
+            </div>
+        </div>
+        <div class="car-item">
+            <button class="star" onclick="toggleStar(this, 'BENZ S-Class')">★</button>
+            <img src="image/BenzSclass.png" alt="BenzSclass.png">
+            <div class="car-info">
+                <p class="car-title">
+                    BENZ S-Class</p>
+                    <button class="car-price" onclick="purchase('BENZ S-Class', 24310)">구매하기</button>
+                
+                <p>가격 14,780 ~ 24,310만원</p>
+                <p>출력 286 ~ 503hp</p>
+                <p>토크 51 ~ 71.4kg.m</p>
+                <p>배기 2,925 ~ 3,982cc</p>
+                <p>엔진 I6, V8 트윈터보</p>
+            </div>
+        </div>
+        <div class="car-item">
+            <button class="star" onclick="toggleStar(this, 'BENZ GLE-Class')">★</button>
+            <img src="image/BenzGLE.png" alt="BenzGLE.png">
+            <div class="car-info">
+                <p class="car-title">
+                    BENZ GLE-Class</p>
+                    <button class="car-price" onclick="purchase('BENZ GLE-Class', 13080)">구매하기</button>
+                
+                <p>가격 11,090 ~ 13,080만원</p>
+                <p>출력 272 ~ 367hp</p>
+                <p>토크 51 ~ 56.1kg.m</p>
+                <p>배기 1,950 ~ 2,999cc</p>
+                <p>엔진 I4, I6 트윈터보</p>
+            </div>
+        </div>
+        <div class="car-item">
+            <button class="star" onclick="toggleStar(this, 'BENZ MAYBACH')">★</button>
+            <img src="image/BenzMAYBACH.png" alt="BenzMAYBACH.png">
+            <div class="car-info">
+                <p class="car-title">
+                    BENZ MAYBACH</p>
+                    <button class="car-price" onclick="purchase('BENZ S-Class MAYBACH', 37500)">구매하기</button>
+                
+                <p>가격 29,500 ~ 37,500만원</p>
+                <p>출력 503 ~ 630hp</p>
+                <p>토크 71.4 ~ 91.8kg.m</p>
+                <p>배기 3,982 ~ 5,980cc</p>
+                <p>엔진 V8, V12 트윈터보</p>
+            </div>
+        </div>
+        <div class="car-item">
+            <button class="star" onclick="toggleStar(this, 'Audi A6')">★</button>
+            <img src="image/AudiA6.png" alt="AudiA6.png">
+            <div class="car-info">
+                <p class="car-title">
+                    Audi A6</p>
+                    <button class="car-price" onclick="purchase('Audi A8', 9557)">구매하기</button>
+                
+                <p>가격 7,072 ~ 9,557만원</p>
+                <p>출력 204 ~ 286hp</p>
+                <p>토크 37.7 ~ 63.2kg.m</p>
+                <p>배기 1,968 ~ 2,967cc</p>
+                <p>엔진 I4, V6 싱글터보</p>
+            </div>
+        </div>
+        <div class="car-item">
+            <button class="star" onclick="toggleStar(this, 'Audi A8')">★</button>
+            <img src="image/AudiA8.png" alt="AudiA8.png">
+            <div class="car-info">
+                <p class="car-title">
+                    Audi A8</p>
+                    <button class="car-price" onclick="purchase('Audi A8', 14440)">구매하기</button>
+                
+                <p>가격 14,038 ~ 14,440만원</p>
+                <p>출력 286hp</p>
+                <p>토크 61.1kg.m</p>
+                <p>배기 2,967cc</p>
+                <p>엔진 V6 싱글터보</p>
+            </div>
+        </div>
+        <div class="car-item">
+            <button class="star" onclick="toggleStar(this, 'Audi e-tron GT')">★</button>
+            <img src="image/AudiEtronGT.png" alt="AudiEtronGT.png">
+            <div class="car-info">
+                <p class="car-title">
+                    Audi e-tron GT</p>
+                    <button class="car-price" onclick="purchase('Audi e-tron GT', 16632)">구매하기</button>
+                
+                <p>가격 14,332 ~ 16,632만원</p>
+                <p>주행 362km 1회 충전 시</p>
+                <p>출력 390kW 모터 (523hp 단순환산치)</p>
+                <p>토크 640Nm 모터 (65.3kg.m 단순환산치)</p>
+                <p>용량 93.4kWh 배터리</p>
+            </div>
+        </div>
+        <div class="car-item">
+            <button class="star" onclick="toggleStar(this, 'Audi R8')">★</button>
+            <img src="image/AudiR8.png" alt="AudiR8.png">
+            <div class="car-info">
+                <p class="car-title">
+                    Audi R8</p>
+                    <button class="car-price" onclick="purchase('Audi R8', 25569)">구매하기</button>
+                
+                <p>가격 25,569만원</p>
+                <p>출력 610hp</p>
+                <p>토크 57.1kg.m</p>
+                <p>배기 5,204cc</p>
+                <p>엔진 V10 자연흡기</p>
+            </div>
+        </div>
+        
+</div>
+
+<script>
+    function showAll() {
+        var carItems = document.querySelectorAll('.car-item');
+        carItems.forEach(function (item) {
+            item.style.display = '';
+        });
+    }
+
+    function filterByBrand(brand) {
+        showAll()
+        var carItems = document.querySelectorAll('.car-item');
+        carItems.forEach(function (item) {
+            var carTitleText = item.querySelector('.car-title').innerText;
+            var carBrand = carTitleText.split(' ')[0].toUpperCase(); // 첫 번째 단어를 브랜드로 사용
+            if (carBrand === brand.toUpperCase()) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    function purchase(model, price) {
+        
+        var moneyBoxFrame = document.getElementById('navFrame');
+        moneyBoxFrame.contentWindow.updateMoney(model, price)
+
+    };
+
+    var starredCar = [];
+    function toggleStar(button, model) {
+        // 버튼의 현재 상태를 확인하여 토글
+        var isStarred = button.classList.contains('starred');
+        
+        // 토글된 상태에 따라 스타일 변경
+        if (isStarred) {
+            button.classList.remove('starred');
+            
+            var valueToRemove = model;
+            var index = starredCar.indexOf(valueToRemove);
+            if (index !== -1) 
+                starredCar.splice(index, 1);
+            
+            console.log(starredCar);
+        } else {
+            button.classList.add('starred');
+            starredCar.push(model);
+            console.log(starredCar);
+        }
+    }
+
+    function filterStarredCar() {
+        var carItems = document.querySelectorAll('.car-item');
+        carItems.forEach(function (item) {
+            var model = item.querySelector('.car-title').innerText;
+            console.log(model);
+            var isStarred = starredCar.includes(model);
+
+            if (isStarred) {
+                item.style.display = '';  // Display the item if it's starred
+            } else {
+                item.style.display = 'none';  // Hide the item if it's not starred
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

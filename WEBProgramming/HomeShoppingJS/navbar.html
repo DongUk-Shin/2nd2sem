@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>순카</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #E33535;
+            color: white;
+            padding: 10px 0;
+            height: 100%;
+        }
+
+        .header-content {
+                display: flex;
+                max-width: 100%;
+                align-items: center;
+        }
+        ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        ul {
+            margin-left: 100px;
+            padding: 0;
+        }
+
+        .logo img{
+            height: 70px;
+        }
+
+        .header-title {
+            text-align: center;
+            flex-grow: 1;
+            font-weight: bold;
+            font-size: 30px;
+            margin: 0;
+        }
+
+        .header-title a {
+            text-decoration: none;
+            color: white;
+            font-size: 40px;
+        }
+
+        ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+
+        ul li a:hover {
+            color: #000000;
+            
+        }
+        .money-box {
+            margin-right: auto;
+            font-size: 20px;
+            line-height: 0.5;
+        }
+        .money-box a {
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+        .money-box a:hover { 
+            color: #000000;
+        }
+
+        @media screen and (max-width: 800px) {
+            .header-content {
+                display: inline;
+                
+                max-width: 100%;
+            }
+            ul li {
+                display: block;
+            }
+            ul {
+                text-align: center;
+                margin-left: 0;
+                padding: 0;
+            }
+            .money-box {
+                text-align: center;
+            }
+            .header-title {
+                text-align: center;
+            }
+            .logo {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img  src="image/logo.png" alt="SoonCar Logo">
+            </div>
+            <div class="header-title">
+                <a href="main.html" target="_parent">SoonCar</a>
+            </div>
+
+            <div class="money-box">
+                <p>잔액: <span class="money" id="moneyValue">100000</span> 만원</p>
+                <a href="chargemoney.html" target="_parent">잔액 충전</a>
+            </div>
+            
+
+            <ul>
+                <li><a href="signin.html" target="_parent">SignIn</a></li>
+                <li><a href="signup.html" target="_parent">SignUp</a></li>
+            </ul>
+        </div>
+    </header>
+
+<script>
+    function updateMoney(model, money) {
+        let currentMoney = parseInt(document.getElementById('moneyValue').textContent);
+
+        if (money > currentMoney) {
+            alert("잔액이 부족합니다"); 
+            return;
+        }
+        let newMoney = currentMoney - money;
+        document.getElementById('moneyValue').textContent = newMoney;
+        alert(model + "를(을) 구매하셨습니다!"); 
+    };
+</script>
+
+</body>
+
+</html>

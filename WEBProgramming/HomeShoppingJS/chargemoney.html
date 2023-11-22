@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            width: 100%;
+            margin: 0;
+        }
+
+        .nav iframe {
+            width: 100%;
+            height: 100px;
+            border: none;
+        }
+
+        @media screen and (max-width: 800px) {
+            .nav iframe {
+                width: 100%;
+                height: 300px;
+                border: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <iframe src="navbar.html" frameborder="0" scrolling="no"></iframe>
+    </div>
+
+    <!-- Balance Recharge Form -->
+    <form id="balanceForm" onsubmit="return validateForm()">
+        <label for="amount">충전할 금액:</label>
+        <input type="text" id="amount" name="amount" required>
+        <br>
+        <input type="submit" value="충전하기">
+    </form>
+
+    <script>
+        function validateForm() {
+            var amount = document.getElementById("amount").value;
+
+            if (isNaN(amount) || amount <= 0) {
+                alert("충전할 금액을 올바르게 입력하세요.");
+                return false;
+            }
+
+            alert("충전이 완료되었습니다!");
+            return true;
+        }
+    </script>
+
+</body>
+
+</html>
