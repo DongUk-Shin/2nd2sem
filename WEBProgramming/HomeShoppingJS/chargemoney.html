@@ -31,36 +31,50 @@
                 border: none;
             }
         }
+        /* Button styling */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 
 <body>
     <div class="nav">
-        <iframe src="navbar.html" frameborder="0" scrolling="no"></iframe>
+        <iframe src="navbar.html" id="navFrame"></iframe>
     </div>
 
-    <!-- Balance Recharge Form -->
-    <form id="balanceForm" onsubmit="return validateForm()">
-        <label for="amount">충전할 금액:</label>
-        <input type="text" id="amount" name="amount" required>
-        <br>
-        <input type="submit" value="충전하기">
-    </form>
+    <!-- Balance Recharge Button -->
+    <button onclick="charge(0)">충전하기</button>
+    <button onclick="charge(10000)">10000만원 충전</button>
+    <button onclick="charge(5000)">5000만원 충전</button>
+
 
     <script>
-        function validateForm() {
-            var amount = document.getElementById("amount").value;
-
-            if (isNaN(amount) || amount <= 0) {
-                alert("충전할 금액을 올바르게 입력하세요.");
-                return false;
+        function charge(money) {
+            if (money == 0) {
+                var amount = parseInt(prompt("충전할 금액을 입력하세요:"));
+                if (!isNaN(amount)) {
+                    var moneyBoxFrame = document.getElementById('navFrame');
+                    moneyBoxFrame.contentWindow.chargeMoney(amount);
+                } else {
+                    alert("올바른 숫자를 입력하세요.");
+                }
             }
-
-            alert("충전이 완료되었습니다!");
-            return true;
+            var moneyBoxFrame = document.getElementById('navFrame');
+            moneyBoxFrame.contentWindow.chargeMoney(money);
         }
     </script>
-
 </body>
 
 </html>

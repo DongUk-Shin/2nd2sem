@@ -129,7 +129,7 @@
     </header>
 
 <script>
-    function updateMoney(model, money) {
+    function spendMoney(model, money) {
         let currentMoney = parseInt(document.getElementById('moneyValue').textContent);
 
         if (money > currentMoney) {
@@ -140,6 +140,13 @@
         document.getElementById('moneyValue').textContent = newMoney;
         alert(model + "를(을) 구매하셨습니다!"); 
     };
+
+    function chargeMoney(money) {
+        let currentMoney = parseInt(document.getElementById('moneyValue').textContent);
+        let newMoney = currentMoney + money;
+        document.getElementById('moneyValue').textContent = newMoney;
+    };
+
 </script>
 
 </body>
