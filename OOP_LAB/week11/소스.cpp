@@ -7,10 +7,10 @@ class A {
 public:
 	A() {
 		a = 0;
-		cout << "持失切 A: " << a << endl;
+		cout << "Const A: " << a << endl;
 	}
 	virtual ~A() {
-		cout << "社瑚切 A" << endl;
+		cout << "Dist A" << endl;
 	}
 	void f() {
 		cout << " f() in A" << endl;
@@ -25,10 +25,10 @@ class B : public A {
 public:
 	B() {
 		b = 0;
-		cout << "持失切 B: " << b << endl;
+		cout << "Const B: " << b << endl;
 	}
 	~B() {
-		cout << "社瑚切 B" << endl;
+		cout << "Dist B" << endl;
 	}
 	void f() {
 		cout << " f() in B" << endl;
@@ -43,10 +43,10 @@ class C : public B {
 public:
 	C() {
 		c = 0;
-		cout << "持失切 C: " << c << endl;
+		cout << "Const C: " << c << endl;
 	}
 	~C() {
-		cout << "社瑚切 C" << endl;
+		cout << "Dist C" << endl;
 	}
 	void f() {
 		cout << " f() in C" << endl;
