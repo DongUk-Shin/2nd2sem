@@ -17,8 +17,8 @@ int main() {
 	int a[] = { 3, 4, 5 };
 
 	for (int i : a) {
-		count_if(v.begin(), v.end(), is_div_by(i));
-		cout << "nuumbers divisible by: " << i << endl;
+		int a = count_if(v.begin(), v.end(), is_div_by(i));
+		cout << "nuumbers divisible by: " << i << " " << a << endl;
 	}
 
 }
